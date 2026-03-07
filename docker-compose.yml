@@ -1,0 +1,23 @@
+services:
+  api:
+    build:
+      context: .
+      target: api-runner
+    ports:
+      - "8080:3000"
+    env_file:
+      - apps/api/.env
+
+  web:
+    build:
+      context: .
+      target: web-runner
+    ports:
+      - "8081:3001"
+    env_file:
+      - apps/web/.env
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+      - INTERNAL_API_URL=http://api:3000
+    depends_on:
+      - api
