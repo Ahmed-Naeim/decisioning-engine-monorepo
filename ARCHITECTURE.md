@@ -13,18 +13,18 @@ graph TD
     classDef external fill:#F59E0B,stroke:#B45309,stroke-width:2px,color:#FFFBEB
     classDef docker fill:#0284C7,stroke:#0369A1,stroke-width:2px,color:#F0F9FF,stroke-dasharray: 5 5
 
-    subgraph Docker Network [Internal Bridge]
+    subgraph DockerNetwork [Internal Bridge]
         direction TB
         
-        subgraph Next.js Workspace [Frontend App: 8081]
-            A[Browser Client]:::client -->|Client-side Fetch\n(admin panel)| D
-            A -->|Server Action Fetch\n(generateCopy)| B
+        subgraph NextJSWorkspace [Frontend App: 8081]
+            A[Browser Client]:::client -->|Client-side Fetch\nadmin panel| D
+            A -->|Server Action Fetch\ngenerateCopy| B
             
             B[App Router\nServer Actions]:::nextjs
-            C[SSR Server\n(Landing Page)]:::nextjs
+            C[SSR Server\nLanding Page]:::nextjs
         end
 
-        subgraph NestJS Workspace [Backend API: 8080]
+        subgraph NestJSWorkspace [Backend API: 8080]
             D[ConsentInterceptor]:::nestjs
             E[DecisionController]:::nestjs
             F[Rule Engine\nVariants]:::nestjs
