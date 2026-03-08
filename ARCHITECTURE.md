@@ -17,28 +17,28 @@ graph TD
         direction TB
         
         subgraph NextJSWorkspace [Frontend App: 8081]
-            A[Browser Client]:::client -->|Client-side Fetch \n admin panel| D
-            A -->|Server Action Fetch \n generateCopy| B
+            A[Browser Client]:::client -->|Client-side Fetch \ admin panel| D
+            A -->|Server Action Fetch \ generateCopy| B
             
-            B[App Router \n Server Actions]:::nextjs
-            C[SSR Server \n Landing Page]:::nextjs
+            B[App Router \ Server Actions]:::nextjs
+            C[SSR Server \ Landing Page]:::nextjs
         end
 
         subgraph NestJSWorkspace [Backend API: 8080]
             D[ConsentInterceptor]:::nestjs
             E[DecisionController]:::nestjs
-            F[Rule Engine \n Variants]:::nestjs
+            F[Rule Engine \ Variants]:::nestjs
             
-            D -->|Strips PII if\n marketing=false| E
+            D -->|Strips PII if \ marketing=false| E
             E --> F
             F -->|Response| D
         end
         
-        C -->|Internal Fetch \n HTTP:3000| D
+        C -->|Internal Fetch \ HTTP:3000| D
         B -->|Server-To-Server| D
     end
 
-    G([Google GenAI \n gemini-2.5-flash]):::external
+    G([Google GenAI \ gemini-2.5-flash]):::external
     B -->|Content Generation| G
     G -->|Response / Validation| B
 ```
